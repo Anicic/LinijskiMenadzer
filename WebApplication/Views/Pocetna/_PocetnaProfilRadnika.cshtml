@@ -1,0 +1,46 @@
+﻿@model WebApplication.Models.RadnikViewModel
+
+@*<img src='https://cdn2.iconfinder.com/data/icons/people-3-2/128/Programmer-Avatar-Backend-Developer-Nerd-512.png' id="Slika" style="display:block;margin:auto;" class="col-11" />*@
+<img src='https://www.jeancoutu.com/globalassets/revamp/photo/conseils-photo/20160302-01-reseaux-sociaux-profil/image-principale-919b9d.png' id="Slika" style="display:block;margin:auto;" class="col-11" />
+
+<p class="mt-4 text-white text-center" style="font-size:20px">@Model.Ime @Model.Prezime</p>
+@if (Model.Lider)
+{
+    <p class="text-white text-center" style="font-size:20px">Tim lider</p>
+}
+else
+{
+    <p class="text-white text-center" style="font-size:20px">Zaposleni</p>
+}
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="progress-title">Radno vrijeme</h3>
+
+            @if (Model.ProcenatPrekovremenogRada > 0)
+            {
+                <div class="progress">
+                    <div class="progress-bar bg-success" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="@(Model.VrijemeProvedenoNaPoslu)" role="progressbar" data-before="▲ @(string.Format("{0:hh\\:mm}", Model.DolazakNaPosao))h" data-after="@(string.Format("{0:hh\\:mm}", Model.OdlazakSaPosla))h ▲" aria-valuenow="@Model.ProcenatProvedenogVremenaNaPoslu"
+                         aria-valuemin="0" aria-valuemax="100" style="width: @(Model.ProcenatProvedenogVremenaNaPoslu)%; height:15px;    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;"></div>
+                    <div class="progress-bar progress-bara bg-warning" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="@(Model.PrekovremenoVrijemeProvedenoNaPoslu)" role="progressbar" data-aftera="@(string.Format("{0:hh\\:mm}", Model.OtisaoSaPosla))h ▼" aria-valuenow="@Model.ProcenatPrekovremenogRada"
+                         aria-valuemin="0" aria-valuemax="@Model.ProcenatPrekovremenogRada" style="width: @(Model.ProcenatPrekovremenogRada)%; height:15px;     border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;"></div>
+
+                </div>
+            }
+            else
+            {
+                <div class="progress progress1" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="@(Model.VrijemeProvedenoNaPoslu)" id="" data-before="▲ @(string.Format("{0:hh\\:mm}", Model.DolazakNaPosao))h" data-after="@(string.Format("{0:hh\\:mm}", Model.OdlazakSaPosla))h ▲">
+                    <div id="progressVrijeme" class="progress-bar bg-success" role="progressbar" aria-valuenow="@Model.ProcenatProvedenogVremenaNaPoslu"
+                         aria-valuemin="0" aria-valuemax="100" style="width: @(Model.ProcenatProvedenogVremenaNaPoslu)%; height:15px"></div>
+                </div>
+            }
+
+            <h3 class="progress-title">Prisutnost</h3>
+            <canvas id="prisutnostUMjesecu" style="height:20vh; width:250px;"></canvas>
+        </div>
+
+    </div>
+</div>

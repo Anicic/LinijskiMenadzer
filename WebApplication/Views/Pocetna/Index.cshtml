@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row right_side reset ml-1">
+
+    <div class="ProfilDiv col-xl-3 col-md-4" id="pocetnaProfil">
+
+    </div>
+    <div class="col-xl-9 col-md-8 col-sm-12 reset pocetnaScroll">
+        <div class="row col-md-12 col-sm-12 reset p-2 pt-3">
+            <div class="col-md-6 col-sm-6 reset row">
+                <div class="">
+                    <input type="button" class="btn Grupe btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropDownGrupe" data-grupaid="@(((IEnumerable<SelectListItem>)ViewBag.Grupe).ElementAt(0).Value)" value="@(((IEnumerable<SelectListItem>)ViewBag.Grupe).ElementAt(0).Text) &#9661">
+                    <ul class="dropdown-menu dropGrupe p-2">
+                        @foreach (var item in (IEnumerable
+                        <SelectListItem>
+                            )ViewBag.Grupe)
+                        {
+                            <li id="@item.Value"><a href="#">@item.Text</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="dropdown reset pl-1">
+                    <input type="button" class="btn Statusi btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropDownStatusi" data-statusid="@(((IEnumerable<SelectListItem>)ViewBag.Status).ElementAt(0).Value)" value="@(((IEnumerable<SelectListItem>)ViewBag.Status).ElementAt(0).Text) &#9661">
+                    <ul class="dropdown-menu dropStatus p-2">
+                        @foreach (var item in (IEnumerable
+                        <SelectListItem>
+                            )ViewBag.Status)
+                        {
+                            <li id="@item.Value"><a href="#">@item.Text</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 reset">
+                <div class="col-md-12 col-sm-12 reset row">
+                    <div class="col-md-6 col-sm-6 reset">
+                        <div class="form-group reset col-md-12 col-sm-12">
+                            <div class="input-group reset" id="kalendar">
+                                <span class="input-group-addon reset">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                                <input type="text" class="form-control" id="date" placeholder="Izaberite datum">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 reset pl-1">
+                        <div class="col-md-9 col-sm-9 pull-right reset">
+                            <div class="reset">
+                                <input class="form-control search-field" type="search" id="text" placeholder="Pretraga...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="SviRadnici p-2" id="results">
+        </div>
+        <h3 class="lista pl-2 naslov">Prisutnost članova grupe za izabrani datum</h3>
+        <div class="col-xl-10 offset-1 col-md-12-offset-0 col-sm-12" id="chartovi" style="height:320px;">
+            <canvas id="barChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/App/PieModalStatistika.js"></script>
+    <script src="~/Scripts/App/refreshRadnika.js"></script>
+    <script src="~/Scripts/App/pocetnaBarPrisutnost.js"></script>
+    <script src="~/Scripts/App/ucitavanjePocetnogProfila.js"></script>
+    <script src="~/Scripts/App/pocetnaPretraga.js"></script>
+}

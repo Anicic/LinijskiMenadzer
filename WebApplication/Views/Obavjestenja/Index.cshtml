@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="grupe-radnici row reset">
+
+    <div class="col-xl-5 pt-3">
+
+        <div class="widget has-shadow listaObavjestenja">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <div class="col-lg-12 pl-0 pr-0">
+                    <div class="row m-0 p-0">
+                        <div class="col-lg-6 pl-0 ml-0">
+                            <div class="reset col-lg-12 row">
+                                <h3 class="col-lg-5 dropdown reset">Obavještenja</h3>
+                                <div class="dropdown col-lg-5">
+                                    <input type="button"
+                                           class="btn StatusObavjestenja btn-outline-primary p-1 ml-1 dropdown-toggle"
+                                           data-toggle="dropdown"
+                                           aria-haspopup="true"
+                                           aria-expanded="false"
+                                           id="dropDownStatusiObavjestenja"
+                                           data-statusobavjestenjeid="@(((IEnumerable<SelectListItem>)ViewBag.TipObavjestenja).ElementAt(0).Value)"
+                                           value="@(((IEnumerable<SelectListItem>)ViewBag.TipObavjestenja).ElementAt(0).Text) ▽">
+                                            <ul class="dropdown-menu dropStatusObavjestenja dropdown-menu padajuci-meni" aria-labelledby="dropdownMenuButton">
+                                                @foreach (var item in (IEnumerable<SelectListItem>)ViewBag.TipObavjestenja)
+                                                {
+                                                    <li class="dropdown-item" id="@item.Value"><a href="#">@item.Text</a></li>
+                                                }
+                                            </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pr-0">
+                            <a href="#" style="font-size:12px; font-weight:bold" class="float-right" id="neprocitanaObavjestenja"></a>
+                            <a href="#" style="font-size:12px; font-weight:bold" class="float-right pr-2" id="osvjeziObavjestenja">Osvježi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-body" id="svaObavjestenja">
+
+                <div class="list-group" id="listaObavjestenja">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xl-7 pt-3">
+
+        <div class="widget has-shadow formaObavjestenja">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <div class="col-lg-12 pl-0 pr-0">
+                    <div class="row m-0 p-0">
+                        <div class="col-lg-6 pl-0 ml-0">
+                            <h3>Zahtjev</h3>
+                        </div>
+                        <div class="col-lg-6 pr-0">
+                            <a href="#" style="font-size:12px; font-weight:bold" id="kreirajNoviZahtjev" class="float-right">Kreiraj novi zahtjev</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-body" id="formaZahtjev">
+
+
+                <div id="zahtjev">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="success_tic" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <a class="close" href="#" id="Zatvori" data-dismiss="modal">&times;</a>
+            <div class="page-body">
+                <div class="head">
+                    <h3 style="margin-top:5px;">Poslano!</h3>
+                    <h4>Uspješno ste poslali zahtjev!</h4>
+                </div>
+
+                <h1 style="text-align:center;">
+                    <div class="checkmark-circle">
+                        <div class="background"></div>
+                        <div class="checkmark draw"></div>
+                    </div>
+                </h1>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/App/zahtjeviIObavjestenja.js"></script>
+
+}

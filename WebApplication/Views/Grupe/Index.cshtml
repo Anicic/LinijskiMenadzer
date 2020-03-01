@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="Grupe" class="tabela" ></div>
+
+@section scripts{
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#Grupe').jtable({
+            title: 'Grupe',
+            paging: true, //Enable paging
+            pageSize: 10, //Set page size (default: 10)
+            sorting: true, //Enable sorting
+            defaultSorting: 'Naziv ASC', //Set default sorting
+            actions: {
+                listAction: '/Grupe/List',
+                deleteAction: '/Grupe/Delete',
+                updateAction: '/Grupe/Update',
+                createAction: '/Grupe/Create'
+            },
+            fields: {
+                GrupaID: {
+                    key: true,
+                    create: false,
+                    edit: false,
+                    list: false
+                },
+                Naziv: {
+                    title: 'Naziv',
+                    width: '23%'
+                },
+                TimLiderID: {
+                    title: 'Tim lider',
+                    width: '30%',
+                    options:'/Grupe/GetLider'
+                }
+            }
+        });
+
+        //Load student list from server
+        $('#Grupe').jtable('load');
+    });
+
+</script>
+    }
+

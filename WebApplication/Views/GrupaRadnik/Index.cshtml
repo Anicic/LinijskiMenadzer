@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="grupaRadnik" class="tabela" ></div>
+
+
+@section scripts{
+    
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            var cacheGrupe = null;
+            var cacheRadnici = null;
+            $('#grupaRadnik').jtable({
+                title: 'Radnici i grupe',
+                paging: true, //Enable paging
+                pageSize: 10, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'GrupaID ASC', //Set default sorting
+                actions: {
+                    listAction: '/GrupaRadnik/List',
+                    deleteAction: '/GrupaRadnik/Delete',
+                    updateAction: '/GrupaRadnik/Update',
+                    createAction: '/GrupaRadnik/Create'
+                },
+                fields: {
+                    GrupaRadnikID: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    GrupaID: {
+                        title: 'Grupa',
+                        options: function () {
+
+                            if (cacheGrupe) { //Check for cache
+                                return cacheGrupe;
+                            }
+
+                            var options = [];
+
+                            $.ajax({ //Not found in cache, get from server
+                                url: '/GrupaRadnik/GetGrupe',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                    if (data.Result != 'OK') {
+                                        alert(data.Message);
+                                        return;
+                                    }
+                                    options = data.Options;
+                                }
+                            });
+
+                            return cacheGrupe = options; //Cache results and return options
+                        }
+                    },
+                    RadnikID: {
+                        title: 'Radnik',
+                        options: function () {
+
+                            if (cacheRadnici) { //Check for cache
+                                return cacheRadnici;
+                            }
+
+                            var options = [];
+
+                            $.ajax({ //Not found in cache, get from server
+                                url: '/GrupaRadnik/GetRadnike',
+                                type: 'POST',
+                                dataType: 'json',
+                                async: false,
+                                success: function (data) {
+                                    if (data.Result != 'OK') {
+                                        alert(data.Message);
+                                        return;
+                                    }
+                                    options = data.Options;
+                                }
+                            });
+
+                            return cacheRadnici = options; //Cache results and return options
+                        }
+                    }
+                }
+            });
+
+            //Load student list from server
+            $('#grupaRadnik').jtable('load');
+        });
+    </script>
+
+}
+

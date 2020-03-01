@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebApplication.Models.ObavjestenjeViewModel>
+
+
+@foreach (var item in Model)
+{
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start obavjestenje" data-obavjestenjeid="@item.ObavjestenjeID" style="@(item.Pregledano == true?"":"background-color:#edf7fc")">
+        <div class="row">
+            <div class="col-lg-2">
+                <img src='https://cdn2.iconfinder.com/data/icons/people-3-2/128/Programmer-Avatar-Backend-Developer-Nerd-512.png' id="Slika" class="col-lg-12 obavjestenja-slika" />
+            </div>
+            <div class="col-lg-10">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">
+                        @item.ObavjestenjeNaziv
+
+                        @{
+
+                            if (item.Pregledano != true)
+                            {
+                                <span class="badge badge-secondary ml-2">Novo</span>
+                            }
+                            else if (item.Odobreno == true)
+                            {
+                                <span class="badge badge-success ml-2">Odobreno</span>
+                            }
+                            else if (item.Odobreno == false)
+                            {
+                                <span class="badge badge-danger ml-2">Odbijeno</span>
+                            }
+                            else if (item.Odobreno == null)
+                            {
+                                <span class="badge badge-warning ml-2">Na cekanju</span>
+                            }
+                        }
+
+                        @*<span class="badge badge-secondary ml-2">Novo</span>*@
+                    </h5>
+                    <small>@item.DatumObavjestenja.ToString("dd.MM.yyyy  hh:mm") </small>
+                </div>
+                <p class="mb-1">@Html.Raw(item.OpisObavjestenja).</p>
+            </div>
+        </div>
+    </a>
+
+}

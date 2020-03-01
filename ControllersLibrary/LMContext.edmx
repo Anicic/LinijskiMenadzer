@@ -1,0 +1,1796 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LinijskiMenadzerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DolazakOdlazak">
+          <Key>
+            <PropertyRef Name="DolazakOdlazakID" />
+          </Key>
+          <Property Name="DolazakOdlazakID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GornjaGranicaDolaska" Type="time" Precision="7" />
+          <Property Name="DonjaGranicaDolaska" Type="time" Precision="7" />
+          <Property Name="GornjaGranicaOdlaska" Type="time" Precision="7" />
+          <Property Name="DonjaGranicaOdlaska" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="EvidencijaRada">
+          <Key>
+            <PropertyRef Name="EvidencijaRadaID" />
+          </Key>
+          <Property Name="EvidencijaRadaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipID" Type="tinyint" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="Pocetak" Type="datetime" Nullable="false" />
+          <Property Name="Kraj" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GodisnjiOdmor">
+          <Key>
+            <PropertyRef Name="GodisnjiOdmorID" />
+          </Key>
+          <Property Name="GodisnjiOdmorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="BrojDana" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GrupaRadnik">
+          <Key>
+            <PropertyRef Name="GrupaRadnikID" />
+          </Key>
+          <Property Name="GrupaRadnikID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GrupaID" Type="smallint" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="Vođa" Type="bit" />
+          <Property Name="DatumOd" Type="datetime" />
+          <Property Name="DatumDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="GrupaZaDorucak">
+          <Key>
+            <PropertyRef Name="GrupaZaDorucakID" />
+          </Key>
+          <Property Name="GrupaZaDorucakID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grupe">
+          <Key>
+            <PropertyRef Name="GrupaID" />
+          </Key>
+          <Property Name="GrupaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="TipGrupeID" Type="smallint" />
+          <Property Name="DatumOd" Type="datetime" />
+          <Property Name="DatumDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Izlaz">
+          <Key>
+            <PropertyRef Name="IzlazID" />
+          </Key>
+          <Property Name="IzlazID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NadredjeniRadnik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="NadredjeniRadnikID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NeradniDani">
+          <Key>
+            <PropertyRef Name="NeradniDaniID" />
+          </Key>
+          <Property Name="NeradniDaniID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NeradniDan" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obavjestenje">
+          <Key>
+            <PropertyRef Name="ObavjestenjeID" />
+          </Key>
+          <Property Name="ObavjestenjeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PosiljalacID" Type="smallint" Nullable="false" />
+          <Property Name="PrimalacID" Type="smallint" Nullable="false" />
+          <Property Name="SadrzajID" Type="smallint" Nullable="false" />
+          <Property Name="Odobreno" Type="bit" />
+          <Property Name="Pregledano" Type="bit" />
+          <Property Name="TipObavjestenjaID" Type="smallint" Nullable="false" />
+          <Property Name="DatumObavjestenja" Type="datetime" />
+          <Property Name="Odgovor" Type="nvarchar(max)" />
+          <Property Name="GrupaID" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="RadnikID" />
+          </Key>
+          <Property Name="RadnikID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SektorID" Type="tinyint" />
+          <Property Name="DomenskoIme" Type="nvarchar" MaxLength="100" />
+          <Property Name="EmailAdresa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SlikaID" Type="smallint" />
+          <Property Name="BrojTelefona" Type="varchar" MaxLength="15" />
+          <Property Name="Pol" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="RadnikGrupaZaDorucak">
+          <Key>
+            <PropertyRef Name="RadnikGrupaZaDorucakID" />
+          </Key>
+          <Property Name="RadnikGrupaZaDorucakID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="GrupaZaDorucakID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RadnikRola">
+          <Key>
+            <PropertyRef Name="RadnikRolaID" />
+          </Key>
+          <Property Name="RadnikRolaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RolaID" Type="tinyint" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RadnikUser">
+          <Key>
+            <PropertyRef Name="RadnikUserID" />
+          </Key>
+          <Property Name="RadnikUserID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" />
+          <Property Name="UserID" Type="smallint" />
+        </EntityType>
+        <EntityType Name="RadnoVrijeme">
+          <Key>
+            <PropertyRef Name="RadnoVrijemeID" />
+          </Key>
+          <Property Name="RadnoVrijemeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mjesec" Type="tinyint" Nullable="false" />
+          <Property Name="RadnihSatiUMjesecu" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rola">
+          <Key>
+            <PropertyRef Name="RolaID" />
+          </Key>
+          <Property Name="RolaID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SadrzajObavjestenja">
+          <Key>
+            <PropertyRef Name="SadrzajObavjestenjaID" />
+          </Key>
+          <Property Name="SadrzajObavjestenjaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TextObavjestenja" Type="nvarchar(max)" />
+          <Property Name="RadnikID" Type="smallint" />
+          <Property Name="DatumOd" Type="datetime" />
+          <Property Name="DatumDo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="SektorID" />
+          </Key>
+          <Property Name="SektorID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Slika">
+          <Key>
+            <PropertyRef Name="SlikaID" />
+          </Key>
+          <Property Name="SlikaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Slika1" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SluzbeniPut">
+          <Key>
+            <PropertyRef Name="SluzbeniPutID" />
+          </Key>
+          <Property Name="SluzbeniPutID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="DatumPolaska" Type="datetime" Nullable="false" />
+          <Property Name="DatumDolaska" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TerminiZaDorucak">
+          <Key>
+            <PropertyRef Name="TerminiZaDorucakID" />
+          </Key>
+          <Property Name="TerminiZaDorucakID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GrupaZaDorucakID" Type="smallint" Nullable="false" />
+          <Property Name="DatumOd" Type="datetime" Nullable="false" />
+          <Property Name="DatumDo" Type="datetime" Nullable="false" />
+          <Property Name="VrijemPocetka" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tip">
+          <Key>
+            <PropertyRef Name="TipID" />
+          </Key>
+          <Property Name="TipID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipGrupe">
+          <Key>
+            <PropertyRef Name="TipGrupeID" />
+          </Key>
+          <Property Name="TipGrupeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipObavjestenja">
+          <Key>
+            <PropertyRef Name="TipObavjestenjaID" />
+          </Key>
+          <Property Name="TipObavjestenjaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OpisObavjestenja" Type="nvarchar" MaxLength="150" />
+          <Property Name="Odgovor" Type="bit" />
+        </EntityType>
+        <EntityType Name="TipPauze">
+          <Key>
+            <PropertyRef Name="TipPauzeID" />
+          </Key>
+          <Property Name="TipPauzeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VrijemePauze">
+          <Key>
+            <PropertyRef Name="VrijemePauzeID" />
+          </Key>
+          <Property Name="VrijemePauzeID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipPauzeID" Type="tinyint" Nullable="false" />
+          <Property Name="PauzaMinute" Type="tinyint" Nullable="false" />
+          <Property Name="VrijemePauzeOd" Type="time" Precision="7" />
+          <Property Name="VrijemePauzeDo" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="VrijemeZaposlenja">
+          <Key>
+            <PropertyRef Name="VrijemeZaposlenjaID" />
+          </Key>
+          <Property Name="VrijemeZaposlenjaID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RadnikID" Type="smallint" Nullable="false" />
+          <Property Name="DatumZaposlenja" Type="datetime" Nullable="false" />
+          <Property Name="DatumPrestankaRada" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkTime">
+          <Key>
+            <PropertyRef Name="WorkTimeID" />
+          </Key>
+          <Property Name="WorkTimeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="smallint" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="InTimeText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="OutTimeText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="InTime" Type="time" Precision="7" />
+          <Property Name="OutTime" Type="time" Precision="7" />
+          <Property Name="IzlazID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Evidencij__TipID__74AE54BC">
+          <End Role="Tip" Type="Self.Tip" Multiplicity="1" />
+          <End Role="EvidencijaRada" Type="Self.EvidencijaRada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip">
+              <PropertyRef Name="TipID" />
+            </Principal>
+            <Dependent Role="EvidencijaRada">
+              <PropertyRef Name="TipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupaRadn__Grupa__6C190EBB">
+          <End Role="Grupe" Type="Self.Grupe" Multiplicity="1" />
+          <End Role="GrupaRadnik" Type="Self.GrupaRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupe">
+              <PropertyRef Name="GrupaID" />
+            </Principal>
+            <Dependent Role="GrupaRadnik">
+              <PropertyRef Name="GrupaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Radnik__SlikaID__02084FDA">
+          <End Role="Slika" Type="Self.Slika" Multiplicity="0..1" />
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slika">
+              <PropertyRef Name="SlikaID" />
+            </Principal>
+            <Dependent Role="Radnik">
+              <PropertyRef Name="SlikaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RadnikRol__RolaI__6B24EA82">
+          <End Role="Rola" Type="Self.Rola" Multiplicity="1" />
+          <End Role="RadnikRola" Type="Self.RadnikRola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rola">
+              <PropertyRef Name="RolaID" />
+            </Principal>
+            <Dependent Role="RadnikRola">
+              <PropertyRef Name="RolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkTime__UserID__797309D9">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="WorkTime" Type="Self.WorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkTime">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EvidencijaRada_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="EvidencijaRada" Type="Self.EvidencijaRada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="EvidencijaRada">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GodisnjiOdmor_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="GodisnjiOdmor" Type="Self.GodisnjiOdmor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="GodisnjiOdmor">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupaRadnik_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="GrupaRadnik" Type="Self.GrupaRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="GrupaRadnik">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupe_TipGrupe">
+          <End Role="TipGrupe" Type="Self.TipGrupe" Multiplicity="0..1" />
+          <End Role="Grupe" Type="Self.Grupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipGrupe">
+              <PropertyRef Name="TipGrupeID" />
+            </Principal>
+            <Dependent Role="Grupe">
+              <PropertyRef Name="TipGrupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NadrdjeniRadnik_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="NadredjeniRadnik" Type="Self.NadredjeniRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="NadredjeniRadnik">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NadrdjeniRadnik_Radnik1">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="NadredjeniRadnik" Type="Self.NadredjeniRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="NadredjeniRadnik">
+              <PropertyRef Name="NadredjeniRadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Obavjestenje" Type="Self.Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="PosiljalacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_Radnik1">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="Obavjestenje" Type="Self.Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="PrimalacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_SadrajObavjestenja">
+          <End Role="SadrzajObavjestenja" Type="Self.SadrzajObavjestenja" Multiplicity="1" />
+          <End Role="Obavjestenje" Type="Self.Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SadrzajObavjestenja">
+              <PropertyRef Name="SadrzajObavjestenjaID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="SadrzajID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_TipObavjestenja">
+          <End Role="TipObavjestenja" Type="Self.TipObavjestenja" Multiplicity="1" />
+          <End Role="Obavjestenje" Type="Self.Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipObavjestenja">
+              <PropertyRef Name="TipObavjestenjaID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="TipObavjestenjaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikGrupaZaDorucak_GrupaZaDorucak">
+          <End Role="GrupaZaDorucak" Type="Self.GrupaZaDorucak" Multiplicity="1" />
+          <End Role="RadnikGrupaZaDorucak" Type="Self.RadnikGrupaZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Principal>
+            <Dependent Role="RadnikGrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikGrupaZaDorucak_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="RadnikGrupaZaDorucak" Type="Self.RadnikGrupaZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikGrupaZaDorucak">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikRola_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="RadnikRola" Type="Self.RadnikRola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikRola">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikUser_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="RadnikUser" Type="Self.RadnikUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikUser">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="RadnikUser" Type="Self.RadnikUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RadnikUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SadrajObavjestenja_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="0..1" />
+          <End Role="SadrzajObavjestenja" Type="Self.SadrzajObavjestenja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="SadrzajObavjestenja">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SluzbeniPut_Radnik">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="SluzbeniPut" Type="Self.SluzbeniPut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="SluzbeniPut">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminiZaDorucak_GrupaZaDorucak">
+          <End Role="GrupaZaDorucak" Type="Self.GrupaZaDorucak" Multiplicity="1" />
+          <End Role="TerminiZaDorucak" Type="Self.TerminiZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Principal>
+            <Dependent Role="TerminiZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VrijemePauze_TipPauze">
+          <End Role="TipPauze" Type="Self.TipPauze" Multiplicity="1" />
+          <End Role="VrijemePauze" Type="Self.VrijemePauze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipPauze">
+              <PropertyRef Name="TipPauzeID" />
+            </Principal>
+            <Dependent Role="VrijemePauze">
+              <PropertyRef Name="TipPauzeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VrijemeZaposlenja_RadnikView">
+          <End Role="Radnik" Type="Self.Radnik" Multiplicity="1" />
+          <End Role="VrijemeZaposlenja" Type="Self.VrijemeZaposlenja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="VrijemeZaposlenja">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTime_Izlaz">
+          <End Role="Izlaz" Type="Self.Izlaz" Multiplicity="1" />
+          <End Role="WorkTime" Type="Self.WorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Izlaz">
+              <PropertyRef Name="IzlazID" />
+            </Principal>
+            <Dependent Role="WorkTime">
+              <PropertyRef Name="IzlazID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LinijskiMenadzerModelStoreContainer">
+          <EntitySet Name="DolazakOdlazak" EntityType="Self.DolazakOdlazak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EvidencijaRada" EntityType="Self.EvidencijaRada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GodisnjiOdmor" EntityType="Self.GodisnjiOdmor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupaRadnik" EntityType="Self.GrupaRadnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GrupaZaDorucak" EntityType="Self.GrupaZaDorucak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupe" EntityType="Self.Grupe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Izlaz" EntityType="Self.Izlaz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NadredjeniRadnik" EntityType="Self.NadredjeniRadnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NeradniDani" EntityType="Self.NeradniDani" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obavjestenje" EntityType="Self.Obavjestenje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Radnik" EntityType="Self.Radnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RadnikGrupaZaDorucak" EntityType="Self.RadnikGrupaZaDorucak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RadnikRola" EntityType="Self.RadnikRola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RadnikUser" EntityType="Self.RadnikUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RadnoVrijeme" EntityType="Self.RadnoVrijeme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rola" EntityType="Self.Rola" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SadrzajObavjestenja" EntityType="Self.SadrzajObavjestenja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sektor" EntityType="Self.Sektor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slika" EntityType="Self.Slika" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SluzbeniPut" EntityType="Self.SluzbeniPut" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TerminiZaDorucak" EntityType="Self.TerminiZaDorucak" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tip" EntityType="Self.Tip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipGrupe" EntityType="Self.TipGrupe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipObavjestenja" EntityType="Self.TipObavjestenja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipPauze" EntityType="Self.TipPauze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VrijemePauze" EntityType="Self.VrijemePauze" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VrijemeZaposlenja" EntityType="Self.VrijemeZaposlenja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkTime" EntityType="Self.WorkTime" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Evidencij__TipID__74AE54BC" Association="Self.FK__Evidencij__TipID__74AE54BC">
+            <End Role="Tip" EntitySet="Tip" />
+            <End Role="EvidencijaRada" EntitySet="EvidencijaRada" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupaRadn__Grupa__6C190EBB" Association="Self.FK__GrupaRadn__Grupa__6C190EBB">
+            <End Role="Grupe" EntitySet="Grupe" />
+            <End Role="GrupaRadnik" EntitySet="GrupaRadnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Radnik__SlikaID__02084FDA" Association="Self.FK__Radnik__SlikaID__02084FDA">
+            <End Role="Slika" EntitySet="Slika" />
+            <End Role="Radnik" EntitySet="Radnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RadnikRol__RolaI__6B24EA82" Association="Self.FK__RadnikRol__RolaI__6B24EA82">
+            <End Role="Rola" EntitySet="Rola" />
+            <End Role="RadnikRola" EntitySet="RadnikRola" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkTime__UserID__797309D9" Association="Self.FK__WorkTime__UserID__797309D9">
+            <End Role="User" EntitySet="User" />
+            <End Role="WorkTime" EntitySet="WorkTime" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EvidencijaRada_Radnik" Association="Self.FK_EvidencijaRada_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="EvidencijaRada" EntitySet="EvidencijaRada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GodisnjiOdmor_Radnik" Association="Self.FK_GodisnjiOdmor_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="GodisnjiOdmor" EntitySet="GodisnjiOdmor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupaRadnik_Radnik" Association="Self.FK_GrupaRadnik_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="GrupaRadnik" EntitySet="GrupaRadnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupe_TipGrupe" Association="Self.FK_Grupe_TipGrupe">
+            <End Role="TipGrupe" EntitySet="TipGrupe" />
+            <End Role="Grupe" EntitySet="Grupe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NadrdjeniRadnik_Radnik" Association="Self.FK_NadrdjeniRadnik_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="NadredjeniRadnik" EntitySet="NadredjeniRadnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NadrdjeniRadnik_Radnik1" Association="Self.FK_NadrdjeniRadnik_Radnik1">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="NadredjeniRadnik" EntitySet="NadredjeniRadnik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_Radnik" Association="Self.FK_Obavjestenje_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_Radnik1" Association="Self.FK_Obavjestenje_Radnik1">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_SadrajObavjestenja" Association="Self.FK_Obavjestenje_SadrajObavjestenja">
+            <End Role="SadrzajObavjestenja" EntitySet="SadrzajObavjestenja" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_TipObavjestenja" Association="Self.FK_Obavjestenje_TipObavjestenja">
+            <End Role="TipObavjestenja" EntitySet="TipObavjestenja" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikGrupaZaDorucak_GrupaZaDorucak" Association="Self.FK_RadnikGrupaZaDorucak_GrupaZaDorucak">
+            <End Role="GrupaZaDorucak" EntitySet="GrupaZaDorucak" />
+            <End Role="RadnikGrupaZaDorucak" EntitySet="RadnikGrupaZaDorucak" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikGrupaZaDorucak_Radnik" Association="Self.FK_RadnikGrupaZaDorucak_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="RadnikGrupaZaDorucak" EntitySet="RadnikGrupaZaDorucak" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikRola_Radnik" Association="Self.FK_RadnikRola_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="RadnikRola" EntitySet="RadnikRola" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikUser_Radnik" Association="Self.FK_RadnikUser_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="RadnikUser" EntitySet="RadnikUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikUser_User" Association="Self.FK_RadnikUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="RadnikUser" EntitySet="RadnikUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SadrajObavjestenja_Radnik" Association="Self.FK_SadrajObavjestenja_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="SadrzajObavjestenja" EntitySet="SadrzajObavjestenja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SluzbeniPut_Radnik" Association="Self.FK_SluzbeniPut_Radnik">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="SluzbeniPut" EntitySet="SluzbeniPut" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminiZaDorucak_GrupaZaDorucak" Association="Self.FK_TerminiZaDorucak_GrupaZaDorucak">
+            <End Role="GrupaZaDorucak" EntitySet="GrupaZaDorucak" />
+            <End Role="TerminiZaDorucak" EntitySet="TerminiZaDorucak" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VrijemePauze_TipPauze" Association="Self.FK_VrijemePauze_TipPauze">
+            <End Role="TipPauze" EntitySet="TipPauze" />
+            <End Role="VrijemePauze" EntitySet="VrijemePauze" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VrijemeZaposlenja_RadnikView" Association="Self.FK_VrijemeZaposlenja_RadnikView">
+            <End Role="Radnik" EntitySet="Radnik" />
+            <End Role="VrijemeZaposlenja" EntitySet="VrijemeZaposlenja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTime_Izlaz" Association="Self.FK_WorkTime_Izlaz">
+            <End Role="Izlaz" EntitySet="Izlaz" />
+            <End Role="WorkTime" EntitySet="WorkTime" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LinijskiMenadzerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="LMContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DolazakOdlazaks" EntityType="LinijskiMenadzerModel.DolazakOdlazak" />
+          <EntitySet Name="EvidencijaRadas" EntityType="LinijskiMenadzerModel.EvidencijaRada" />
+          <EntitySet Name="GodisnjiOdmors" EntityType="LinijskiMenadzerModel.GodisnjiOdmor" />
+          <EntitySet Name="GrupaRadniks" EntityType="LinijskiMenadzerModel.GrupaRadnik" />
+          <EntitySet Name="GrupaZaDorucaks" EntityType="LinijskiMenadzerModel.GrupaZaDorucak" />
+          <EntitySet Name="Grupes" EntityType="LinijskiMenadzerModel.Grupe" />
+          <EntitySet Name="Izlazs" EntityType="LinijskiMenadzerModel.Izlaz" />
+          <EntitySet Name="NadredjeniRadniks" EntityType="LinijskiMenadzerModel.NadredjeniRadnik" />
+          <EntitySet Name="NeradniDanis" EntityType="LinijskiMenadzerModel.NeradniDani" />
+          <EntitySet Name="Radniks" EntityType="LinijskiMenadzerModel.Radnik" />
+          <EntitySet Name="RadnikGrupaZaDorucaks" EntityType="LinijskiMenadzerModel.RadnikGrupaZaDorucak" />
+          <EntitySet Name="RadnikRolas" EntityType="LinijskiMenadzerModel.RadnikRola" />
+          <EntitySet Name="RadnikUsers" EntityType="LinijskiMenadzerModel.RadnikUser" />
+          <EntitySet Name="SadrzajObavjestenjas" EntityType="LinijskiMenadzerModel.SadrzajObavjestenja" />
+          <EntitySet Name="Sektors" EntityType="LinijskiMenadzerModel.Sektor" />
+          <EntitySet Name="Slikas" EntityType="LinijskiMenadzerModel.Slika" />
+          <EntitySet Name="SluzbeniPuts" EntityType="LinijskiMenadzerModel.SluzbeniPut" />
+          <EntitySet Name="TerminiZaDorucaks" EntityType="LinijskiMenadzerModel.TerminiZaDorucak" />
+          <EntitySet Name="Tips" EntityType="LinijskiMenadzerModel.Tip" />
+          <EntitySet Name="TipGrupes" EntityType="LinijskiMenadzerModel.TipGrupe" />
+          <EntitySet Name="TipObavjestenjas" EntityType="LinijskiMenadzerModel.TipObavjestenja" />
+          <EntitySet Name="TipPauzes" EntityType="LinijskiMenadzerModel.TipPauze" />
+          <EntitySet Name="Users" EntityType="LinijskiMenadzerModel.User" />
+          <EntitySet Name="VrijemePauzes" EntityType="LinijskiMenadzerModel.VrijemePauze" />
+          <EntitySet Name="VrijemeZaposlenjas" EntityType="LinijskiMenadzerModel.VrijemeZaposlenja" />
+          <EntitySet Name="WorkTimes" EntityType="LinijskiMenadzerModel.WorkTime" />
+          <AssociationSet Name="FK__Evidencij__TipID__74AE54BC" Association="LinijskiMenadzerModel.FK__Evidencij__TipID__74AE54BC">
+            <End Role="Tip" EntitySet="Tips" />
+            <End Role="EvidencijaRada" EntitySet="EvidencijaRadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EvidencijaRada_Radnik" Association="LinijskiMenadzerModel.FK_EvidencijaRada_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="EvidencijaRada" EntitySet="EvidencijaRadas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GodisnjiOdmor_Radnik" Association="LinijskiMenadzerModel.FK_GodisnjiOdmor_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="GodisnjiOdmor" EntitySet="GodisnjiOdmors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GrupaRadn__Grupa__6C190EBB" Association="LinijskiMenadzerModel.FK__GrupaRadn__Grupa__6C190EBB">
+            <End Role="Grupe" EntitySet="Grupes" />
+            <End Role="GrupaRadnik" EntitySet="GrupaRadniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GrupaRadnik_Radnik" Association="LinijskiMenadzerModel.FK_GrupaRadnik_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="GrupaRadnik" EntitySet="GrupaRadniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikGrupaZaDorucak_GrupaZaDorucak" Association="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_GrupaZaDorucak">
+            <End Role="GrupaZaDorucak" EntitySet="GrupaZaDorucaks" />
+            <End Role="RadnikGrupaZaDorucak" EntitySet="RadnikGrupaZaDorucaks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TerminiZaDorucak_GrupaZaDorucak" Association="LinijskiMenadzerModel.FK_TerminiZaDorucak_GrupaZaDorucak">
+            <End Role="GrupaZaDorucak" EntitySet="GrupaZaDorucaks" />
+            <End Role="TerminiZaDorucak" EntitySet="TerminiZaDorucaks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupe_TipGrupe" Association="LinijskiMenadzerModel.FK_Grupe_TipGrupe">
+            <End Role="TipGrupe" EntitySet="TipGrupes" />
+            <End Role="Grupe" EntitySet="Grupes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkTime_Izlaz" Association="LinijskiMenadzerModel.FK_WorkTime_Izlaz">
+            <End Role="Izlaz" EntitySet="Izlazs" />
+            <End Role="WorkTime" EntitySet="WorkTimes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NadrdjeniRadnik_Radnik" Association="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="NadredjeniRadnik" EntitySet="NadredjeniRadniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NadrdjeniRadnik_Radnik1" Association="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik1">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="NadredjeniRadnik" EntitySet="NadredjeniRadniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Radnik__SlikaID__02084FDA" Association="LinijskiMenadzerModel.FK__Radnik__SlikaID__02084FDA">
+            <End Role="Slika" EntitySet="Slikas" />
+            <End Role="Radnik" EntitySet="Radniks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikGrupaZaDorucak_Radnik" Association="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="RadnikGrupaZaDorucak" EntitySet="RadnikGrupaZaDorucaks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikRola_Radnik" Association="LinijskiMenadzerModel.FK_RadnikRola_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="RadnikRola" EntitySet="RadnikRolas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikUser_Radnik" Association="LinijskiMenadzerModel.FK_RadnikUser_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="RadnikUser" EntitySet="RadnikUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SadrajObavjestenja_Radnik" Association="LinijskiMenadzerModel.FK_SadrajObavjestenja_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="SadrzajObavjestenja" EntitySet="SadrzajObavjestenjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SluzbeniPut_Radnik" Association="LinijskiMenadzerModel.FK_SluzbeniPut_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="SluzbeniPut" EntitySet="SluzbeniPuts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VrijemeZaposlenja_RadnikView" Association="LinijskiMenadzerModel.FK_VrijemeZaposlenja_RadnikView">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="VrijemeZaposlenja" EntitySet="VrijemeZaposlenjas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RadnikUser_User" Association="LinijskiMenadzerModel.FK_RadnikUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RadnikUser" EntitySet="RadnikUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VrijemePauze_TipPauze" Association="LinijskiMenadzerModel.FK_VrijemePauze_TipPauze">
+            <End Role="TipPauze" EntitySet="TipPauzes" />
+            <End Role="VrijemePauze" EntitySet="VrijemePauzes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkTime__UserID__797309D9" Association="LinijskiMenadzerModel.FK__WorkTime__UserID__797309D9">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WorkTime" EntitySet="WorkTimes" />
+          </AssociationSet>
+          <EntitySet Name="RadnoVrijemes" EntityType="LinijskiMenadzerModel.RadnoVrijeme" />
+          <EntitySet Name="Rolas" EntityType="LinijskiMenadzerModel.Rola" />
+          <AssociationSet Name="FK__RadnikRol__RolaI__6B24EA82" Association="LinijskiMenadzerModel.FK__RadnikRol__RolaI__6B24EA82">
+            <End Role="Rola" EntitySet="Rolas" />
+            <End Role="RadnikRola" EntitySet="RadnikRolas" />
+          </AssociationSet>
+          <EntitySet Name="Obavjestenjes" EntityType="LinijskiMenadzerModel.Obavjestenje" />
+          <AssociationSet Name="FK_Obavjestenje_Radnik" Association="LinijskiMenadzerModel.FK_Obavjestenje_Radnik">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_Radnik1" Association="LinijskiMenadzerModel.FK_Obavjestenje_Radnik1">
+            <End Role="Radnik" EntitySet="Radniks" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_SadrajObavjestenja" Association="LinijskiMenadzerModel.FK_Obavjestenje_SadrajObavjestenja">
+            <End Role="SadrzajObavjestenja" EntitySet="SadrzajObavjestenjas" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenjes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obavjestenje_TipObavjestenja" Association="LinijskiMenadzerModel.FK_Obavjestenje_TipObavjestenja">
+            <End Role="TipObavjestenja" EntitySet="TipObavjestenjas" />
+            <End Role="Obavjestenje" EntitySet="Obavjestenjes" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="DolazakOdlazak">
+          <Key>
+            <PropertyRef Name="DolazakOdlazakID" />
+          </Key>
+          <Property Name="DolazakOdlazakID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GornjaGranicaDolaska" Type="Time" Precision="7" />
+          <Property Name="DonjaGranicaDolaska" Type="Time" Precision="7" />
+          <Property Name="GornjaGranicaOdlaska" Type="Time" Precision="7" />
+          <Property Name="DonjaGranicaOdlaska" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="EvidencijaRada">
+          <Key>
+            <PropertyRef Name="EvidencijaRadaID" />
+          </Key>
+          <Property Name="EvidencijaRadaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipID" Type="Byte" Nullable="false" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="Pocetak" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Kraj" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Tip" Relationship="LinijskiMenadzerModel.FK__Evidencij__TipID__74AE54BC" FromRole="EvidencijaRada" ToRole="Tip" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_EvidencijaRada_Radnik" FromRole="EvidencijaRada" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="GodisnjiOdmor">
+          <Key>
+            <PropertyRef Name="GodisnjiOdmorID" />
+          </Key>
+          <Property Name="GodisnjiOdmorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="BrojDana" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_GodisnjiOdmor_Radnik" FromRole="GodisnjiOdmor" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="GrupaRadnik">
+          <Key>
+            <PropertyRef Name="GrupaRadnikID" />
+          </Key>
+          <Property Name="GrupaRadnikID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GrupaID" Type="Int16" Nullable="false" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="Vođa" Type="Boolean" />
+          <Property Name="DatumOd" Type="DateTime" Precision="3" />
+          <Property Name="DatumDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Grupe" Relationship="LinijskiMenadzerModel.FK__GrupaRadn__Grupa__6C190EBB" FromRole="GrupaRadnik" ToRole="Grupe" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_GrupaRadnik_Radnik" FromRole="GrupaRadnik" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="GrupaZaDorucak">
+          <Key>
+            <PropertyRef Name="GrupaZaDorucakID" />
+          </Key>
+          <Property Name="GrupaZaDorucakID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RadnikGrupaZaDorucaks" Relationship="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_GrupaZaDorucak" FromRole="GrupaZaDorucak" ToRole="RadnikGrupaZaDorucak" />
+          <NavigationProperty Name="TerminiZaDorucaks" Relationship="LinijskiMenadzerModel.FK_TerminiZaDorucak_GrupaZaDorucak" FromRole="GrupaZaDorucak" ToRole="TerminiZaDorucak" />
+        </EntityType>
+        <EntityType Name="Grupe">
+          <Key>
+            <PropertyRef Name="GrupaID" />
+          </Key>
+          <Property Name="GrupaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="TipGrupeID" Type="Int16" />
+          <Property Name="DatumOd" Type="DateTime" Precision="3" />
+          <Property Name="DatumDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="GrupaRadniks" Relationship="LinijskiMenadzerModel.FK__GrupaRadn__Grupa__6C190EBB" FromRole="Grupe" ToRole="GrupaRadnik" />
+          <NavigationProperty Name="TipGrupe" Relationship="LinijskiMenadzerModel.FK_Grupe_TipGrupe" FromRole="Grupe" ToRole="TipGrupe" />
+        </EntityType>
+        <EntityType Name="Izlaz">
+          <Key>
+            <PropertyRef Name="IzlazID" />
+          </Key>
+          <Property Name="IzlazID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkTimes" Relationship="LinijskiMenadzerModel.FK_WorkTime_Izlaz" FromRole="Izlaz" ToRole="WorkTime" />
+        </EntityType>
+        <EntityType Name="NadredjeniRadnik">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="NadredjeniRadnikID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik" FromRole="NadredjeniRadnik" ToRole="Radnik" />
+          <NavigationProperty Name="Radnik1" Relationship="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik1" FromRole="NadredjeniRadnik" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="NeradniDani">
+          <Key>
+            <PropertyRef Name="NeradniDaniID" />
+          </Key>
+          <Property Name="NeradniDaniID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NeradniDan" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Radnik">
+          <Key>
+            <PropertyRef Name="RadnikID" />
+          </Key>
+          <Property Name="RadnikID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prezime" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SektorID" Type="Byte" />
+          <Property Name="DomenskoIme" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAdresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lozinka" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SlikaID" Type="Int16" />
+          <Property Name="BrojTelefona" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Pol" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EvidencijaRadas" Relationship="LinijskiMenadzerModel.FK_EvidencijaRada_Radnik" FromRole="Radnik" ToRole="EvidencijaRada" />
+          <NavigationProperty Name="GodisnjiOdmors" Relationship="LinijskiMenadzerModel.FK_GodisnjiOdmor_Radnik" FromRole="Radnik" ToRole="GodisnjiOdmor" />
+          <NavigationProperty Name="GrupaRadniks" Relationship="LinijskiMenadzerModel.FK_GrupaRadnik_Radnik" FromRole="Radnik" ToRole="GrupaRadnik" />
+          <NavigationProperty Name="NadredjeniRadniks" Relationship="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik" FromRole="Radnik" ToRole="NadredjeniRadnik" />
+          <NavigationProperty Name="NadredjeniRadniks1" Relationship="LinijskiMenadzerModel.FK_NadrdjeniRadnik_Radnik1" FromRole="Radnik" ToRole="NadredjeniRadnik" />
+          <NavigationProperty Name="Slika" Relationship="LinijskiMenadzerModel.FK__Radnik__SlikaID__02084FDA" FromRole="Radnik" ToRole="Slika" />
+          <NavigationProperty Name="RadnikGrupaZaDorucaks" Relationship="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_Radnik" FromRole="Radnik" ToRole="RadnikGrupaZaDorucak" />
+          <NavigationProperty Name="RadnikRolas" Relationship="LinijskiMenadzerModel.FK_RadnikRola_Radnik" FromRole="Radnik" ToRole="RadnikRola" />
+          <NavigationProperty Name="RadnikUsers" Relationship="LinijskiMenadzerModel.FK_RadnikUser_Radnik" FromRole="Radnik" ToRole="RadnikUser" />
+          <NavigationProperty Name="SadrzajObavjestenjas" Relationship="LinijskiMenadzerModel.FK_SadrajObavjestenja_Radnik" FromRole="Radnik" ToRole="SadrzajObavjestenja" />
+          <NavigationProperty Name="SluzbeniPuts" Relationship="LinijskiMenadzerModel.FK_SluzbeniPut_Radnik" FromRole="Radnik" ToRole="SluzbeniPut" />
+          <NavigationProperty Name="VrijemeZaposlenjas" Relationship="LinijskiMenadzerModel.FK_VrijemeZaposlenja_RadnikView" FromRole="Radnik" ToRole="VrijemeZaposlenja" />
+          <NavigationProperty Name="Obavjestenjes" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_Radnik" FromRole="Radnik" ToRole="Obavjestenje" />
+          <NavigationProperty Name="PrimljenaObavjestenje" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_Radnik1" FromRole="Radnik" ToRole="Obavjestenje" />
+          </EntityType>
+        <EntityType Name="RadnikGrupaZaDorucak">
+          <Key>
+            <PropertyRef Name="RadnikGrupaZaDorucakID" />
+          </Key>
+          <Property Name="RadnikGrupaZaDorucakID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="GrupaZaDorucakID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="GrupaZaDorucak" Relationship="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_GrupaZaDorucak" FromRole="RadnikGrupaZaDorucak" ToRole="GrupaZaDorucak" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_RadnikGrupaZaDorucak_Radnik" FromRole="RadnikGrupaZaDorucak" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="RadnikRola">
+          <Key>
+            <PropertyRef Name="RadnikRolaID" />
+          </Key>
+          <Property Name="RadnikRolaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RolaID" Type="Byte" Nullable="false" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_RadnikRola_Radnik" FromRole="RadnikRola" ToRole="Radnik" />
+          <NavigationProperty Name="Rola" Relationship="LinijskiMenadzerModel.FK__RadnikRol__RolaI__6B24EA82" FromRole="RadnikRola" ToRole="Rola" />
+        </EntityType>
+        <EntityType Name="RadnikUser">
+          <Key>
+            <PropertyRef Name="RadnikUserID" />
+          </Key>
+          <Property Name="RadnikUserID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" />
+          <Property Name="UserID" Type="Int16" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_RadnikUser_Radnik" FromRole="RadnikUser" ToRole="Radnik" />
+          <NavigationProperty Name="User" Relationship="LinijskiMenadzerModel.FK_RadnikUser_User" FromRole="RadnikUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SadrzajObavjestenja">
+          <Key>
+            <PropertyRef Name="SadrzajObavjestenjaID" />
+          </Key>
+          <Property Name="SadrzajObavjestenjaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TextObavjestenja" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RadnikID" Type="Int16" />
+          <Property Name="DatumOd" Type="DateTime" Precision="3" />
+          <Property Name="DatumDo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_SadrajObavjestenja_Radnik" FromRole="SadrzajObavjestenja" ToRole="Radnik" />
+          <NavigationProperty Name="Obavjestenjes" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_SadrajObavjestenja" FromRole="SadrzajObavjestenja" ToRole="Obavjestenje" />
+        </EntityType>
+        <EntityType Name="Sektor">
+          <Key>
+            <PropertyRef Name="SektorID" />
+          </Key>
+          <Property Name="SektorID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Slika">
+          <Key>
+            <PropertyRef Name="SlikaID" />
+          </Key>
+          <Property Name="SlikaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Slika1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Radniks" Relationship="LinijskiMenadzerModel.FK__Radnik__SlikaID__02084FDA" FromRole="Slika" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="SluzbeniPut">
+          <Key>
+            <PropertyRef Name="SluzbeniPutID" />
+          </Key>
+          <Property Name="SluzbeniPutID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="DatumPolaska" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumDolaska" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_SluzbeniPut_Radnik" FromRole="SluzbeniPut" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="TerminiZaDorucak">
+          <Key>
+            <PropertyRef Name="TerminiZaDorucakID" />
+          </Key>
+          <Property Name="TerminiZaDorucakID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GrupaZaDorucakID" Type="Int16" Nullable="false" />
+          <Property Name="DatumOd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumDo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VrijemPocetka" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="GrupaZaDorucak" Relationship="LinijskiMenadzerModel.FK_TerminiZaDorucak_GrupaZaDorucak" FromRole="TerminiZaDorucak" ToRole="GrupaZaDorucak" />
+        </EntityType>
+        <EntityType Name="Tip">
+          <Key>
+            <PropertyRef Name="TipID" />
+          </Key>
+          <Property Name="TipID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EvidencijaRadas" Relationship="LinijskiMenadzerModel.FK__Evidencij__TipID__74AE54BC" FromRole="Tip" ToRole="EvidencijaRada" />
+        </EntityType>
+        <EntityType Name="TipGrupe">
+          <Key>
+            <PropertyRef Name="TipGrupeID" />
+          </Key>
+          <Property Name="TipGrupeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Grupes" Relationship="LinijskiMenadzerModel.FK_Grupe_TipGrupe" FromRole="TipGrupe" ToRole="Grupe" />
+        </EntityType>
+        <EntityType Name="TipObavjestenja">
+          <Key>
+            <PropertyRef Name="TipObavjestenjaID" />
+          </Key>
+          <Property Name="TipObavjestenjaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpisObavjestenja" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Odgovor" Type="Boolean" />
+          <NavigationProperty Name="Obavjestenjes" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_TipObavjestenja" FromRole="TipObavjestenja" ToRole="Obavjestenje" />
+        </EntityType>
+        <EntityType Name="TipPauze">
+          <Key>
+            <PropertyRef Name="TipPauzeID" />
+          </Key>
+          <Property Name="TipPauzeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VrijemePauzes" Relationship="LinijskiMenadzerModel.FK_VrijemePauze_TipPauze" FromRole="TipPauze" ToRole="VrijemePauze" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RadnikUsers" Relationship="LinijskiMenadzerModel.FK_RadnikUser_User" FromRole="User" ToRole="RadnikUser" />
+          <NavigationProperty Name="WorkTimes" Relationship="LinijskiMenadzerModel.FK__WorkTime__UserID__797309D9" FromRole="User" ToRole="WorkTime" />
+        </EntityType>
+        <EntityType Name="VrijemePauze">
+          <Key>
+            <PropertyRef Name="VrijemePauzeID" />
+          </Key>
+          <Property Name="VrijemePauzeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipPauzeID" Type="Byte" Nullable="false" />
+          <Property Name="PauzaMinute" Type="Byte" Nullable="false" />
+          <Property Name="VrijemePauzeOd" Type="Time" Precision="7" />
+          <Property Name="VrijemePauzeDo" Type="Time" Precision="7" />
+          <NavigationProperty Name="TipPauze" Relationship="LinijskiMenadzerModel.FK_VrijemePauze_TipPauze" FromRole="VrijemePauze" ToRole="TipPauze" />
+        </EntityType>
+        <EntityType Name="VrijemeZaposlenja">
+          <Key>
+            <PropertyRef Name="VrijemeZaposlenjaID" />
+          </Key>
+          <Property Name="VrijemeZaposlenjaID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RadnikID" Type="Int16" Nullable="false" />
+          <Property Name="DatumZaposlenja" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatumPrestankaRada" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Radnik" Relationship="LinijskiMenadzerModel.FK_VrijemeZaposlenja_RadnikView" FromRole="VrijemeZaposlenja" ToRole="Radnik" />
+        </EntityType>
+        <EntityType Name="WorkTime">
+          <Key>
+            <PropertyRef Name="WorkTimeID" />
+          </Key>
+          <Property Name="WorkTimeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int16" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InTimeText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OutTimeText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InTime" Type="Time" Precision="7" />
+          <Property Name="OutTime" Type="Time" Precision="7" />
+          <Property Name="IzlazID" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Izlaz" Relationship="LinijskiMenadzerModel.FK_WorkTime_Izlaz" FromRole="WorkTime" ToRole="Izlaz" />
+          <NavigationProperty Name="User" Relationship="LinijskiMenadzerModel.FK__WorkTime__UserID__797309D9" FromRole="WorkTime" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Evidencij__TipID__74AE54BC">
+          <End Type="LinijskiMenadzerModel.Tip" Role="Tip" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.EvidencijaRada" Role="EvidencijaRada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tip">
+              <PropertyRef Name="TipID" />
+            </Principal>
+            <Dependent Role="EvidencijaRada">
+              <PropertyRef Name="TipID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EvidencijaRada_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.EvidencijaRada" Role="EvidencijaRada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="EvidencijaRada">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GodisnjiOdmor_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.GodisnjiOdmor" Role="GodisnjiOdmor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="GodisnjiOdmor">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GrupaRadn__Grupa__6C190EBB">
+          <End Type="LinijskiMenadzerModel.Grupe" Role="Grupe" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.GrupaRadnik" Role="GrupaRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupe">
+              <PropertyRef Name="GrupaID" />
+            </Principal>
+            <Dependent Role="GrupaRadnik">
+              <PropertyRef Name="GrupaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GrupaRadnik_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.GrupaRadnik" Role="GrupaRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="GrupaRadnik">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikGrupaZaDorucak_GrupaZaDorucak">
+          <End Type="LinijskiMenadzerModel.GrupaZaDorucak" Role="GrupaZaDorucak" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.RadnikGrupaZaDorucak" Role="RadnikGrupaZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Principal>
+            <Dependent Role="RadnikGrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TerminiZaDorucak_GrupaZaDorucak">
+          <End Type="LinijskiMenadzerModel.GrupaZaDorucak" Role="GrupaZaDorucak" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.TerminiZaDorucak" Role="TerminiZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GrupaZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Principal>
+            <Dependent Role="TerminiZaDorucak">
+              <PropertyRef Name="GrupaZaDorucakID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grupe_TipGrupe">
+          <End Type="LinijskiMenadzerModel.TipGrupe" Role="TipGrupe" Multiplicity="0..1" />
+          <End Type="LinijskiMenadzerModel.Grupe" Role="Grupe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipGrupe">
+              <PropertyRef Name="TipGrupeID" />
+            </Principal>
+            <Dependent Role="Grupe">
+              <PropertyRef Name="TipGrupeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkTime_Izlaz">
+          <End Type="LinijskiMenadzerModel.Izlaz" Role="Izlaz" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.WorkTime" Role="WorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Izlaz">
+              <PropertyRef Name="IzlazID" />
+            </Principal>
+            <Dependent Role="WorkTime">
+              <PropertyRef Name="IzlazID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NadrdjeniRadnik_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.NadredjeniRadnik" Role="NadredjeniRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="NadredjeniRadnik">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NadrdjeniRadnik_Radnik1">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.NadredjeniRadnik" Role="NadredjeniRadnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="NadredjeniRadnik">
+              <PropertyRef Name="NadredjeniRadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Radnik__SlikaID__02084FDA">
+          <End Type="LinijskiMenadzerModel.Slika" Role="Slika" Multiplicity="0..1" />
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slika">
+              <PropertyRef Name="SlikaID" />
+            </Principal>
+            <Dependent Role="Radnik">
+              <PropertyRef Name="SlikaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikGrupaZaDorucak_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.RadnikGrupaZaDorucak" Role="RadnikGrupaZaDorucak" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikGrupaZaDorucak">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikRola_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.RadnikRola" Role="RadnikRola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikRola">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikUser_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="LinijskiMenadzerModel.RadnikUser" Role="RadnikUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="RadnikUser">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SadrajObavjestenja_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="0..1" />
+          <End Type="LinijskiMenadzerModel.SadrzajObavjestenja" Role="SadrzajObavjestenja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="SadrzajObavjestenja">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SluzbeniPut_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.SluzbeniPut" Role="SluzbeniPut" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="SluzbeniPut">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VrijemeZaposlenja_RadnikView">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.VrijemeZaposlenja" Role="VrijemeZaposlenja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="VrijemeZaposlenja">
+              <PropertyRef Name="RadnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RadnikUser_User">
+          <End Type="LinijskiMenadzerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="LinijskiMenadzerModel.RadnikUser" Role="RadnikUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RadnikUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VrijemePauze_TipPauze">
+          <End Type="LinijskiMenadzerModel.TipPauze" Role="TipPauze" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.VrijemePauze" Role="VrijemePauze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipPauze">
+              <PropertyRef Name="TipPauzeID" />
+            </Principal>
+            <Dependent Role="VrijemePauze">
+              <PropertyRef Name="TipPauzeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkTime__UserID__797309D9">
+          <End Type="LinijskiMenadzerModel.User" Role="User" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.WorkTime" Role="WorkTime" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="WorkTime">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RadnoVrijeme">
+          <Key>
+            <PropertyRef Name="RadnoVrijemeID" />
+          </Key>
+          <Property Name="RadnoVrijemeID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mjesec" Type="Byte" Nullable="false" />
+          <Property Name="RadnihSatiUMjesecu" Type="Byte" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rola">
+          <Key>
+            <PropertyRef Name="RolaID" />
+          </Key>
+          <Property Name="RolaID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RadnikRolas" Relationship="LinijskiMenadzerModel.FK__RadnikRol__RolaI__6B24EA82" FromRole="Rola" ToRole="RadnikRola" />
+        </EntityType>
+        <Association Name="FK__RadnikRol__RolaI__6B24EA82">
+          <End Type="LinijskiMenadzerModel.Rola" Role="Rola" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.RadnikRola" Role="RadnikRola" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rola">
+              <PropertyRef Name="RolaID" />
+            </Principal>
+            <Dependent Role="RadnikRola">
+              <PropertyRef Name="RolaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Obavjestenje">
+          <Key>
+            <PropertyRef Name="ObavjestenjeID" />
+          </Key>
+          <Property Name="ObavjestenjeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PosiljalacID" Type="Int16" Nullable="false" />
+          <Property Name="PrimalacID" Type="Int16" Nullable="false" />
+          <Property Name="SadrzajID" Type="Int16" Nullable="false" />
+          <Property Name="Odobreno" Type="Boolean" />
+          <Property Name="Pregledano" Type="Boolean" />
+          <Property Name="TipObavjestenjaID" Type="Int16" Nullable="false" />
+          <Property Name="DatumObavjestenja" Type="DateTime" Precision="3" />
+          <Property Name="Odgovor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GrupaID" Type="Int16" />
+          <NavigationProperty Name="Posiljalac" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_Radnik" FromRole="Obavjestenje" ToRole="Radnik" />
+          <NavigationProperty Name="Primalac" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_Radnik1" FromRole="Obavjestenje" ToRole="Radnik" />
+          <NavigationProperty Name="SadrzajObavjestenja" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_SadrajObavjestenja" FromRole="Obavjestenje" ToRole="SadrzajObavjestenja" />
+          <NavigationProperty Name="TipObavjestenja" Relationship="LinijskiMenadzerModel.FK_Obavjestenje_TipObavjestenja" FromRole="Obavjestenje" ToRole="TipObavjestenja" />
+        </EntityType>
+        <Association Name="FK_Obavjestenje_Radnik">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.Obavjestenje" Role="Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="PosiljalacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_Radnik1">
+          <End Type="LinijskiMenadzerModel.Radnik" Role="Radnik" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.Obavjestenje" Role="Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Radnik">
+              <PropertyRef Name="RadnikID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="PrimalacID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_SadrajObavjestenja">
+          <End Type="LinijskiMenadzerModel.SadrzajObavjestenja" Role="SadrzajObavjestenja" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.Obavjestenje" Role="Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SadrzajObavjestenja">
+              <PropertyRef Name="SadrzajObavjestenjaID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="SadrzajID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obavjestenje_TipObavjestenja">
+          <End Type="LinijskiMenadzerModel.TipObavjestenja" Role="TipObavjestenja" Multiplicity="1" />
+          <End Type="LinijskiMenadzerModel.Obavjestenje" Role="Obavjestenje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipObavjestenja">
+              <PropertyRef Name="TipObavjestenjaID" />
+            </Principal>
+            <Dependent Role="Obavjestenje">
+              <PropertyRef Name="TipObavjestenjaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LinijskiMenadzerModelStoreContainer" CdmEntityContainer="LMContext">
+          <EntitySetMapping Name="DolazakOdlazaks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.DolazakOdlazak">
+              <MappingFragment StoreEntitySet="DolazakOdlazak">
+                <ScalarProperty Name="DonjaGranicaOdlaska" ColumnName="DonjaGranicaOdlaska" />
+                <ScalarProperty Name="GornjaGranicaOdlaska" ColumnName="GornjaGranicaOdlaska" />
+                <ScalarProperty Name="DonjaGranicaDolaska" ColumnName="DonjaGranicaDolaska" />
+                <ScalarProperty Name="GornjaGranicaDolaska" ColumnName="GornjaGranicaDolaska" />
+                <ScalarProperty Name="DolazakOdlazakID" ColumnName="DolazakOdlazakID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EvidencijaRadas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.EvidencijaRada">
+              <MappingFragment StoreEntitySet="EvidencijaRada">
+                <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+                <ScalarProperty Name="Pocetak" ColumnName="Pocetak" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="TipID" ColumnName="TipID" />
+                <ScalarProperty Name="EvidencijaRadaID" ColumnName="EvidencijaRadaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GodisnjiOdmors">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.GodisnjiOdmor">
+              <MappingFragment StoreEntitySet="GodisnjiOdmor">
+                <ScalarProperty Name="BrojDana" ColumnName="BrojDana" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="GodisnjiOdmorID" ColumnName="GodisnjiOdmorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupaRadniks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.GrupaRadnik">
+              <MappingFragment StoreEntitySet="GrupaRadnik">
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="Vođa" ColumnName="Vođa" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="GrupaID" ColumnName="GrupaID" />
+                <ScalarProperty Name="GrupaRadnikID" ColumnName="GrupaRadnikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupaZaDorucaks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.GrupaZaDorucak">
+              <MappingFragment StoreEntitySet="GrupaZaDorucak">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="GrupaZaDorucakID" ColumnName="GrupaZaDorucakID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grupes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Grupe">
+              <MappingFragment StoreEntitySet="Grupe">
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="TipGrupeID" ColumnName="TipGrupeID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="GrupaID" ColumnName="GrupaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Izlazs">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Izlaz">
+              <MappingFragment StoreEntitySet="Izlaz">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzlazID" ColumnName="IzlazID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NadredjeniRadniks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.NadredjeniRadnik">
+              <MappingFragment StoreEntitySet="NadredjeniRadnik">
+                <ScalarProperty Name="NadredjeniRadnikID" ColumnName="NadredjeniRadnikID" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NeradniDanis">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.NeradniDani">
+              <MappingFragment StoreEntitySet="NeradniDani">
+                <ScalarProperty Name="NeradniDan" ColumnName="NeradniDan" />
+                <ScalarProperty Name="NeradniDaniID" ColumnName="NeradniDaniID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Radniks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Radnik">
+              <MappingFragment StoreEntitySet="Radnik">
+                <ScalarProperty Name="Pol" ColumnName="Pol" />
+                <ScalarProperty Name="BrojTelefona" ColumnName="BrojTelefona" />
+                <ScalarProperty Name="SlikaID" ColumnName="SlikaID" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="EmailAdresa" ColumnName="EmailAdresa" />
+                <ScalarProperty Name="DomenskoIme" ColumnName="DomenskoIme" />
+                <ScalarProperty Name="SektorID" ColumnName="SektorID" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RadnikGrupaZaDorucaks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.RadnikGrupaZaDorucak">
+              <MappingFragment StoreEntitySet="RadnikGrupaZaDorucak">
+                <ScalarProperty Name="GrupaZaDorucakID" ColumnName="GrupaZaDorucakID" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="RadnikGrupaZaDorucakID" ColumnName="RadnikGrupaZaDorucakID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RadnikRolas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.RadnikRola">
+              <MappingFragment StoreEntitySet="RadnikRola">
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="RolaID" ColumnName="RolaID" />
+                <ScalarProperty Name="RadnikRolaID" ColumnName="RadnikRolaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RadnikUsers">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.RadnikUser">
+              <MappingFragment StoreEntitySet="RadnikUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="RadnikUserID" ColumnName="RadnikUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SadrzajObavjestenjas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.SadrzajObavjestenja">
+              <MappingFragment StoreEntitySet="SadrzajObavjestenja">
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="TextObavjestenja" ColumnName="TextObavjestenja" />
+                <ScalarProperty Name="SadrzajObavjestenjaID" ColumnName="SadrzajObavjestenjaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sektors">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Sektor">
+              <MappingFragment StoreEntitySet="Sektor">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="SektorID" ColumnName="SektorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slikas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Slika">
+              <MappingFragment StoreEntitySet="Slika">
+                <ScalarProperty Name="Slika1" ColumnName="Slika1" />
+                <ScalarProperty Name="SlikaID" ColumnName="SlikaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SluzbeniPuts">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.SluzbeniPut">
+              <MappingFragment StoreEntitySet="SluzbeniPut">
+                <ScalarProperty Name="DatumDolaska" ColumnName="DatumDolaska" />
+                <ScalarProperty Name="DatumPolaska" ColumnName="DatumPolaska" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="SluzbeniPutID" ColumnName="SluzbeniPutID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TerminiZaDorucaks">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.TerminiZaDorucak">
+              <MappingFragment StoreEntitySet="TerminiZaDorucak">
+                <ScalarProperty Name="VrijemPocetka" ColumnName="VrijemPocetka" />
+                <ScalarProperty Name="DatumDo" ColumnName="DatumDo" />
+                <ScalarProperty Name="DatumOd" ColumnName="DatumOd" />
+                <ScalarProperty Name="GrupaZaDorucakID" ColumnName="GrupaZaDorucakID" />
+                <ScalarProperty Name="TerminiZaDorucakID" ColumnName="TerminiZaDorucakID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tips">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Tip">
+              <MappingFragment StoreEntitySet="Tip">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipID" ColumnName="TipID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipGrupes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.TipGrupe">
+              <MappingFragment StoreEntitySet="TipGrupe">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipGrupeID" ColumnName="TipGrupeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipObavjestenjas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.TipObavjestenja">
+              <MappingFragment StoreEntitySet="TipObavjestenja">
+                <ScalarProperty Name="Odgovor" ColumnName="Odgovor" />
+                <ScalarProperty Name="OpisObavjestenja" ColumnName="OpisObavjestenja" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipObavjestenjaID" ColumnName="TipObavjestenjaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipPauzes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.TipPauze">
+              <MappingFragment StoreEntitySet="TipPauze">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="TipPauzeID" ColumnName="TipPauzeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VrijemePauzes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.VrijemePauze">
+              <MappingFragment StoreEntitySet="VrijemePauze">
+                <ScalarProperty Name="VrijemePauzeDo" ColumnName="VrijemePauzeDo" />
+                <ScalarProperty Name="VrijemePauzeOd" ColumnName="VrijemePauzeOd" />
+                <ScalarProperty Name="PauzaMinute" ColumnName="PauzaMinute" />
+                <ScalarProperty Name="TipPauzeID" ColumnName="TipPauzeID" />
+                <ScalarProperty Name="VrijemePauzeID" ColumnName="VrijemePauzeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VrijemeZaposlenjas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.VrijemeZaposlenja">
+              <MappingFragment StoreEntitySet="VrijemeZaposlenja">
+                <ScalarProperty Name="DatumPrestankaRada" ColumnName="DatumPrestankaRada" />
+                <ScalarProperty Name="DatumZaposlenja" ColumnName="DatumZaposlenja" />
+                <ScalarProperty Name="RadnikID" ColumnName="RadnikID" />
+                <ScalarProperty Name="VrijemeZaposlenjaID" ColumnName="VrijemeZaposlenjaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkTimes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.WorkTime">
+              <MappingFragment StoreEntitySet="WorkTime">
+                <ScalarProperty Name="IzlazID" ColumnName="IzlazID" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTimeText" ColumnName="OutTimeText" />
+                <ScalarProperty Name="InTimeText" ColumnName="InTimeText" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="WorkTimeID" ColumnName="WorkTimeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RadnoVrijemes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.RadnoVrijeme">
+              <MappingFragment StoreEntitySet="RadnoVrijeme">
+                <ScalarProperty Name="RadnihSatiUMjesecu" ColumnName="RadnihSatiUMjesecu" />
+                <ScalarProperty Name="Mjesec" ColumnName="Mjesec" />
+                <ScalarProperty Name="RadnoVrijemeID" ColumnName="RadnoVrijemeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rolas">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Rola">
+              <MappingFragment StoreEntitySet="Rola">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="RolaID" ColumnName="RolaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obavjestenjes">
+            <EntityTypeMapping TypeName="LinijskiMenadzerModel.Obavjestenje">
+              <MappingFragment StoreEntitySet="Obavjestenje">
+                <ScalarProperty Name="GrupaID" ColumnName="GrupaID" />
+                <ScalarProperty Name="Odgovor" ColumnName="Odgovor" />
+                <ScalarProperty Name="DatumObavjestenja" ColumnName="DatumObavjestenja" />
+                <ScalarProperty Name="TipObavjestenjaID" ColumnName="TipObavjestenjaID" />
+                <ScalarProperty Name="Pregledano" ColumnName="Pregledano" />
+                <ScalarProperty Name="Odobreno" ColumnName="Odobreno" />
+                <ScalarProperty Name="SadrzajID" ColumnName="SadrzajID" />
+                <ScalarProperty Name="PrimalacID" ColumnName="PrimalacID" />
+                <ScalarProperty Name="PosiljalacID" ColumnName="PosiljalacID" />
+                <ScalarProperty Name="ObavjestenjeID" ColumnName="ObavjestenjeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

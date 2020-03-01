@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="grupe-radnici row reset">
+
+    <div class="col-xl-6 pt-3">
+
+        <div class="widget has-shadow reset left-grupe">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <input class="form-control search-field" type="text" id="pretragaGrupe" placeholder="Pretraga..." />
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-outline-primary mr-1 mb-2" id="btnDodaj" style="margin-left:3px; margin-top:7px;">DODAJ</button>
+
+            </div>
+            <div class="widget-body" id="sveGrupe">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xl-6 pt-3">
+        <div class="widget has-shadow radnici reset">
+            <div class="widget-header bordered no-actions d-flex align-items-center">
+                <input class="form-control search-field" type="search" id="pretragaRadnika" placeholder="Pretraga..." />
+                <div class="widget-body row col-md-12  search-result rezultat-pretraga pl-4 pr-4 reset" id="svi-Radnici">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="widget-body" id="izabraniRadnici">
+                <ul></ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal modal-top fade show" id="modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kreiranje grupe</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Jeste li sigurni da želite sačuvati grupu?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary"><i class="fas fa-check"></i>Da</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i>Ne</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Kreiranje grupe</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <h5 style="margin-bottom:2px;">Naziv</h5>
+                    @Html.TextBox("Naziv", null, new { @class = "form-control" })
+                    <p id="poruka"></p>
+                </div>
+               
+                <div class="col-12">
+                    <div class="row pl-3">
+                        <h5 id="tip">Tip</h5>
+                        <div class="dropdown reset pl-3">
+                                <input type="button" class="btn Statusi btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropDownStatusi" data-statusid="@(((IEnumerable<SelectListItem>)ViewBag.TipGrupe).ElementAt(0).Value)" value="@(((IEnumerable<SelectListItem>)ViewBag.TipGrupe).ElementAt(0).Text) &#9661">
+                                <ul class="dropdown-menu dropStatus p-2">
+                                    @foreach (var item in (IEnumerable
+                                    <SelectListItem>
+                                        )ViewBag.TipGrupe)
+                                    {
+                                        <li id="@item.Value"><a href="#">@item.Text</a></li>
+                                    }
+                                </ul>
+                            </div>
+                       
+                    </div>
+                </div>
+                <div class="col-12">
+
+                    <div class="styled-checkbox mt-3">
+                        <input type="checkbox" name="checkbox" id="btnTrajanja">
+                        <label for="btnTrajanja">Vrijeme trajanje</label>
+                    </div>
+
+                    <div id="vrijemeTrajanja">
+
+                    </div>
+
+                </div>
+            <div class="modal-footer">
+                <button type="button" id="btnSacuvaj" class="btn btn-success mr-1 mb-2 nekaklasa">Sačuvaj</button>
+                <button type="button" id="btnOdustani" class="btn btn-danger mr-1 mb-2" data-dismiss="modal">Odustani</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+@section scripts{
+    <script src="~/Scripts/App/grupeRadnik.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#btnTrajanja").on('click', function () {
+
+                if ($("#btnTrajanja").is(':checked') === true) {
+                    $("#vrijemeTrajanja").append(`
+                    <h5 style="padding-top:2px;">Krajnji datum</h5>
+                    <input type="text" class="form-control" id="datumKrajaGrupe" placeholder="Izaberi datum">`);
+                    $('#vrijemeTrajanja').find("#datumKrajaGrupe").daterangepicker({
+                        singleDatePicker: true
+                    });
+                } else {
+                    $("#vrijemeTrajanja").html('');
+                }
+
+            });
+
+        });
+
+    </script>
+}

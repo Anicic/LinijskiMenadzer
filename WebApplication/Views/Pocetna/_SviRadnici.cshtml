@@ -1,0 +1,233 @@
+﻿@model IEnumerable<WebApplication.Models.SviRadniciViewModel>
+
+@{
+    /**/
+
+    ViewBag.Title = "_SviRadnici";
+}
+
+
+<div class="widget">
+    <h3 class="naslov">Lista radnika</h3>
+    <div class="pl-5 pr-5 prikaz-tabela">
+        <table id="example" class="table table-striped table-bordered tabela" style="width:100%">
+            <thead class="naslov">
+                <tr class="red">
+                    <th class="naslovtabela" style="padding-left:30px;">#</th>
+                    <th class="naslovtabela">Ime</th>
+                    <th class="naslovtabela">Prezime</th>
+                    <th class="naslovtabela">E-mail adresa</th>
+                    <th class="naslovtabela">Broj telefona</th>
+                    <th class="naslovtabela"><span style="width:100px">Status</span></th>
+                    <th class="naslovtabela">Detalji</th>
+                </tr>
+            </thead>
+            <tbody class="tabelasadrzaj">
+                @{ int i = 0;
+                    foreach (var item in Model)
+                    {
+                        <tr class="red">
+                            @Html.HiddenFor(Model => item.RadnikID)
+                            <td class="podaci"><span id="noorder" class="text-primary">@(i += 1)</span></td>
+                            <td class="podaci">@item.Ime</td>
+                            <td class="podaci">@item.Prezime</td>
+                            <td class="podaci">@item.EmailAdresa</td>
+                            <td class="podaci">@item.BrojTelefona</td>
+
+                            @if (item.NazivStatusa == "Na poslu")
+                            {
+                                <td class="podaci">
+                                    <abbr title="Na poslu">
+                                        <span class="dot" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Na poslu"></span>
+                                    </abbr>
+                                </td>
+                            }
+                            else if (item.NazivStatusa == "Privatno odsutan")
+                            {
+                                <td class="podaci">
+                                    <abbr title="Privatno odsutan">
+                                        <span class="dot4" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Privatno odsustvo"></span>
+                                    </abbr>
+                                </td>
+                            }
+                            else if (item.NazivStatusa == "Višednevno odsutan")
+                            {
+                                <td class="podaci">
+                                    <abbr title="Visednevno odsutan">
+                                        <span class="dot2" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Višednevno odsustvo"></span>
+                                    </abbr>
+                                </td>
+                            }
+                            else if (item.NazivStatusa == "Nepoznato")
+                            {
+                                <td class="podaci">
+                                    <abbr title="Nepoznato">
+                                        <span class="dot3" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Nepoznato"></span>
+                                    </abbr>
+                                </td>
+                            }
+                            else if (item.NazivStatusa == "Službeno odsutan")
+                            {
+                                <td class="podaci">
+                                    <abbr title="Sluzbeno odsutan">
+                                        <span class="dot5" data-toggle="popover" data-trigger="hover" data-placement="right" data-content="Službeno odsutan"></span>
+                                    </abbr>
+                                </td>
+                            }
+                            <td class="td-actions podaci">
+                                <a href="#" data-radnikid="@item.RadnikID" class="btnModal"><i class="far fa-arrow-alt-circle-right edit"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade reset" id="exampleModal" style="position:fixed; padding:0px;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-80" role="document">
+        <div class="modal-content modal-content-95">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detalji</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times delete"></i>
+                </button>
+            </div>
+            <div class="modal-body modal-pocetna">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-12 reset lijevi">
+                        <div>
+                            <img src=""
+                                 id="SlikaModal" class="col-md-12" />
+                            <p id="ImeKorisnika" class="mt-4 text-primary text-center"><br /></p>
+                            <p id="Email" class="mt-4 text-primary text-center"><br /></p>
+                            <p id="BrojTelefona" class="mt-4 text-primary text-center"><br /></p>
+                        </div>
+
+                        <div class="list-group row reset svi-tabovi pl-2 pr-2 col-md-12">
+                            <a class="list-group-item  list-group-item-action active text-center modal-tab" id="list-detalji-list"
+                               data-toggle="list" href="#list-detalji" role="tab" aria-controls="detalji"><span class="">Detalji</span></a>
+                            <a class="list-group-item  list-group-item-action text-center modal-tab" id="list-raspored-list"
+                               data-toggle="list" href="#list-raspored" role="tab" aria-controls="raspored"><span class="">Raspored</span></a>
+                            <a class="list-group-item  list-group-item-action text-center modal-tab" id="list-statistika-list"
+                               data-toggle="list" href="#list-statistika" role="tab" aria-controls="statistika">
+                                <span class="">Statistika</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-lg-12 desni reset">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane col-xl-12 left-aktivnosti fade show active" id="list-detalji" role="tabpanel"
+                                 aria-labelledby="list-detalji-list">
+                                <div class="row modal-background">
+                                    <div class="col-xl-5 reset">
+                                        <input type="text" class="form-control col-xl-12" id="datumModalKalendar" placeholder="Izaberite datum">
+                                        <div class="widget col-xl-12 mt-3 pb-1 aktivnostiRadnika aktivnosti-modal">
+                                            <h3 class="pt-2">Aktivnosti</h3>
+                                            <div id="listaAktivnosti"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-7 col-md-12 reset pl-2">
+                                        <div class="col-xl-12 reset statistika-modal p-2" style="background-color: white; overflow: auto;">
+                                            <div class="col-xl-12 reset">
+                                                <div class="reset col-md-12">
+                                                    <h5>Službeni izlazak</h5>
+                                                    <div id="Sluzbeni">
+                                                        <canvas id="modalSluzbeniPutRadnik"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="reset col-md-12">
+                                                    <h5>Pauza</h5>
+                                                    <div id="MojID">
+                                                        <canvas id="modalPauzaRadnik" class="col-md-12"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="reset col-md-12">
+                                                    <h5>Privatni izlazak</h5>
+                                                    <canvas id="modalPrivatnoOdsustvoRadnik"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-raspored" role="tabpanel" aria-labelledby="list-raspored-list">
+                                <div class="col-md-12 reset row legenda ">
+                                    <div class="col-xl-3 col-md-12 legenda-left reset row">
+                                        <div class="col-xl-12 reset">Preostalo godišnjeg odmora:</div>
+                                        <div class="reset"><span class="godisnji" id="brojDanaGodisnjegOdmora">15</span> dana</div>
+                                    </div>
+                                    <div class="col-xl-9 col-md-12 reset mt-1 legenda-right">
+                                        <div class="row reset ">
+                                            <div class="col-xl-4 col-md-12 col-sm-12 reset row">
+                                                <div class="na-poslu reset"></div><div class="col-md-10">Na poslu</div>
+                                            </div>
+                                            <div class="col-xl-4 col-md-12 reset row">
+                                                <div class="sluzbeno-odsutan reset"></div><div class="col-md-10">Službeno odsutan</div>
+                                            </div>
+                                            <div class="col-xl-4 col-md-12 row reset">
+                                                <div class="privatno-odsutan reset"></div><div class="col-md-10">Privatno odsutan</div>
+                                            </div>
+                                            <div class="row pt-4 reset col-md-12 odsustvo">
+                                                <div class="col-xl-4 col-md-12 row reset">
+                                                    <div class="visednevno-odsutan reset"></div><div class="col-md-10">Višednevno odsutan</div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-12 row reset">
+                                                    <div class="nepoznato reset"></div><div class="col-md-10">Nepoznato</div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-12 row reset">
+                                                    <div class="neradni reset"></div><div class="col-md-10">Neradni dan</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 reset">
+                                    <div class="monthly kalendar" id="mycalendar"></div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show" id="list-statistika" role="tabpanel"
+                                 aria-labelledby="list-statistika-list">
+
+                                <div class="tab-pane fade show" id="list-statistika" role="tabpanel" aria-labelledby="list-statistika-list">
+                                    <div class="form-group row reset">
+                                        <div class="col-md-12 col-xl-6 statistika-pie">
+                                            <div class="form-group">
+                                                <div class="input-group col-md-12 pt-2">
+                                                    <input type="text" class="form-control" id="daterangeaco" placeholder="Izaberite datum">
+                                                </div>
+                                                <div id="krofnaChartModal" class="col-md-12 reset">
+                                                    <canvas id="prisutnostModal" class="chartjs-render-monitor"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-xl-6 statistika-line reset p-2">
+                                            <div class="col-md-12 reset">
+                                                <div>
+                                                    <h5>Službeni izlazak</h5>
+                                                    <canvas id="modalStatistikaSluzbeniIzlazak"></canvas>
+                                                </div>
+                                                <div>
+                                                    <h5>Privatni izlazak</h5>
+                                                    <canvas id="modalStatistikaPrivatniIzlazak"></canvas>
+                                                </div>
+                                                <div>
+                                                    <h5>Pauza</h5>
+                                                    <canvas id="modalStatistikaPauza"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

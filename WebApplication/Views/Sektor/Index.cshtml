@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="Sektor" class="tabela" ></div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Sektor').jtable({
+                title: 'Sektori',
+                paging: true, //Enable paging
+                pageSize: 10, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'Naziv ASC', //Set default sorting
+                actions: {
+                    listAction: '/Sektor/List',
+                    deleteAction: '/Sektor/Delete',
+                    updateAction: '/Sektor/Update',
+                    createAction: '/Sektor/Create'
+                },
+                fields: {
+                    SektorID: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    Naziv: {
+                        title: 'Naziv sektora',
+                        inputClass: 'validate[required]'
+                    },
+
+                }
+            });
+
+            //Load student list from server
+            $('#Sektor').jtable('load');
+        });
+    </script>
+}

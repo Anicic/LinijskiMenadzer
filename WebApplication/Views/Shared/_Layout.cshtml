@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testovi</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Montserrat:200,300,400,500,600,700", "Noto+Sans:400,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    @Styles.Render("~/Content/jtable-css")
+    @Styles.Render("~/Content/monthly")
+    @Styles.Render("~/Content/bootstrap")
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    @Styles.Render("~/Content/ecoone")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/summernote")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .dropdown-menu-notifikacija {
+            top: 50px;
+            right: 170px;
+            left: unset;
+            width: 460px;
+            box-shadow: 0px 5px 7px -1px #c1c1c1;
+            padding-bottom: 0px;
+            padding: 0px;
+        }
+
+            .dropdown-menu-notifikacija:before {
+                content: "";
+                position: absolute;
+                top: -20px;
+                right: 0px;
+                border: 10px solid #00537A;
+                border-color: transparent transparent #00537A transparent;
+            }
+
+        .head {
+            padding: 5px 15px;
+            border-radius: 3px 3px 0px 0px;
+        }
+
+        .footer {
+            padding: 0px 15px;
+            border-radius: 0px 0px 3px 3px;
+        }
+
+        .notification-box {
+            padding: 5px 0px;
+        }
+        #NotifikacijaSlike {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    @{
+
+    }
+
+</head>
+<body id="page-top" class="p-0 m-0" style="padding-top:0px">
+    <div id="preloader">
+        <div class="canvas">
+            <img src="https://www.datum.rs/home/wp-content/uploads/2019/02/logoLANACO.jpg" alt="Linijski menadžer" class="loader-logo">
+            <div class="spinner"></div>
+        </div>
+    </div>
+    <div class="page" style="height:100%; width: 100%;">
+        <header class="header">
+            <nav class="navbar fixed-top">
+                <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+                    <div class="navbar-header">
+                        <a href="/Pocetna/Index" class="navbar-brand">
+                            <div class="brand-image brand-big">                                
+                                    <img src="~/Content/themes/base/images/Logo-big.png" alt="logo" class="logo-big">                               
+                            </div>
+                            <div class="brand-image brand-small">
+                                <img src="~/Content/themes/base/images/Logo.png" alt="logo" class="logo-small">
+                            </div>
+                        </a>
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                    </div>
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+                        <li>
+                            <i id="notifikacije" class="fas fa-bell fa-lg bellIkonica"></i>
+
+                            <div>
+                                <ul id="listaNotifikacija" class="dropdown-menu dropdown-menu-notifikacija" style="margin-right:175px">
+                                    <li class="head text-light" style="background-color:#00537A">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-sm-12 col-12">
+                                                <span>Obavjestenja (<span id="BrojObavjestenja"> </span>)</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div id="Notifikacije">
+
+                                    </div>
+
+                                    <div class="footer text-center" style="background-color:#00537A">
+                                        <a href="/obavjestenja/index" class="text-light p-1" style="font-weight: bold; font-size: 16px;">Više</a>
+                                    </div>
+
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="ml-4 mr-1 korisnikIkonica"><div><a href="/OsnovneInformacije/Index"><i class="fas fa-user fa-lg mr-2"></i>@WebApplication.HelperClass.ImeIPrezimeLogovanogRadnika.ImeRadnika()</a></div></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <div class="default-sidebar">
+                <nav class="side-navbar box-scroll sidebar-scroll">
+                    <ul class="list-unstyled" id="nesto">
+                        <li>
+                            <a href="/OsnovneInformacije/Index"><i class="fas fa-user" id="Osnovne-informacije-active"></i><span>Osnovne informacije</span></a>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                WebApplication.HelperClass.WindowsRoleProvider objekatklase = new WebApplication.HelperClass.WindowsRoleProvider();
+                                if (objekatklase.IsUserInRole(User.Identity.Name, "tim lider,admin"))
+                                {
+                                    <a href="/Pocetna/Index"><i class="fas fa-home" id="pocetna-active"></i><span>Početna</span></a>
+                                }
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                WebApplication.HelperClass.WindowsRoleProvider objekatklase = new WebApplication.HelperClass.WindowsRoleProvider();
+                                if (objekatklase.IsUserInRole(User.Identity.Name, "admin,menadžer"))
+                                {
+                                    <a href="/GrupaRadnik1/Index"><i class="fas fa-tools" id="administracija-active"></i><span>Administracija</span></a>
+                                }
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                WebApplication.HelperClass.WindowsRoleProvider objekatklase = new WebApplication.HelperClass.WindowsRoleProvider();
+                                if (objekatklase.IsUserInRole(User.Identity.Name, "tim lider,admin,menadžer,radnik"))
+                                {
+                                    <a href="/obavjestenja/index"><i class="fas fa-bell" id="obavjestenje-active"></i><span>Obavještenja</span></a>
+                                }
+                            }
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="content-inner">
+                <div class="container-fluid reset">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalObavjestenja" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modalNotifikacije" role="document">
+            <div class="modal-content col-md-4 offset-4 modal-obavjestenja">
+                <div class="modal-header zaglavlje-modal-obavjestenje">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-info-circle pr-2"></i>Obavještenje</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times zatvori-prozor"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body modal-poruka p-0">
+                    <p class="poruke p-2">
+                        <span class="modal-content-left">Pošiljalac:</span> <span class="modal-content-right" id="Posiljalac"></span><br />
+                        <span class="modal-content-left">Tip obavještenja:</span> <span class="modal-content-right" id="TipObavjestenja"></span>
+                    </p>
+                    <p class="text-center sadrzaj">
+                        <span id="sadrzajObavjestenja"></span>
+                    </p>
+                    <p class="poruke p-2">
+                        <span class="modal-content-left">Pregledano:</span> <span class="modal-content-right" id="Pregledano"></span><br />
+                        <span class="modal-content-left">Odobreno:</span> <span class="modal-content-right" id="Odobreno"></span>
+                    </p>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+                    <button type="button" class="btn btn-primary">Sacuvaj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/monthly")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jtable-scripts")
+    @Scripts.Render("~/bundles/ecoone")
+    @Scripts.Render("~/bundles/summernote")
+    @Scripts.Render("~/bundles/Flatpickr")
+
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.js"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/App/Notifikacije.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script>
+    $('#Osnovne-informacije-active').parent('a').addClass('active');
+</script>

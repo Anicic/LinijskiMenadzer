@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div class="glavni row reset">
+        <div class="widget shadow-lg has-shadow pb-1 mb-1 col-md-12 reset kalendar-pretraga">
+            <div class="row reset">
+                <div class="dropdown reset pl-1 pt-3">
+                    <input type="button" class="btn Statusi btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropDownStatusi" data-statusid="@(((IEnumerable<SelectListItem>)ViewBag.Tipovi).ElementAt(0).Value)" value="@(((IEnumerable<SelectListItem>)ViewBag.Tipovi).ElementAt(0).Text) &#9661">
+                    <ul class="dropdown-menu dropStatus p-2">
+                        @foreach (var item in (IEnumerable
+                        <SelectListItem>
+                            )ViewBag.Tipovi)
+                        {
+                            <li id="@item.Value"><a href="#">@item.Text</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="form-group reset pl-1">
+                    <div class="input-group reset cal" id="datum">
+                        <span class="input-group-addon reset">
+                            <i class="far fa-calendar-alt"></i>
+                        </span>
+
+                        <div id="stavitiDatum">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row col-md-12 reset" id="prikazOsnovnihInformacija">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="~/Scripts/App/osnovneInformacijeIzborIzgleda.js"></script>
+}

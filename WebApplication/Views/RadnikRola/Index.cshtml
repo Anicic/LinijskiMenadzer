@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="RadnikRolaContainer" class="tabela" ></div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#RadnikRolaContainer').jtable({
+                title: 'Role radnika',
+                paging: true, //Enable paging
+                pageSize: 10, //Set page size (default: 10)
+                sorting: true, //Enable sorting
+                defaultSorting: 'RadnikID ASC', //Set default sorting
+                actions: {
+                    listAction: '/RadnikRola/List',
+                    deleteAction: '/RadnikRola/Delete',
+                    updateAction: '/RadnikRola/Update',
+                    createAction: '/RadnikRola/Create'
+                },
+                fields: {
+                    RadnikRolaID: {
+                        key: true,
+                        create: false,
+                        edit: false,
+                        list: false
+                    },
+                    RadnikID: {
+                        title: 'Radnik',
+                        width: '23%',
+                        options: '/RadnikRola/GetRadnik'
+                    },
+                    RolaID: {
+                        title: 'Rola',
+                        width: '23%',
+                        options: '/RadnikRola/GetRola'
+                    }
+                }
+
+            });
+
+            //Load rola list from server
+            $('#RadnikRolaContainer').jtable('load');
+        });
+
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebApplication.Models.AktivnostViewModel>
+
+@{
+    if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-12 mt-3 reset">
+                <div class="row widget has-shadow pt-3 pb-3 reset hover">
+                    @{
+
+                        if (item.IzlazID == 1)
+                        {
+                            <div class="col-md-2"><i class="fas fa-coffee @(item.Odlazak == true ? "coffe-not" : "coffe")"></i></div>
+                        }
+                        else if (item.IzlazID == 2)
+                        {
+                            <div class="col-md-2"><i class="fas fa-running @(item.Odlazak == true ? "run-not" : "run")"></i></div>
+                        }
+                        else if (item.IzlazID == 3)
+                        {
+                            <div class="col-md-2"><i class="fas fa-plane @(item.Odlazak == true ? "plane-not" : "plane")"></i></div>
+                        }
+                        else
+                        {
+                            <div class="col-md-2"><i class="fas fa-business-time @(item.Odlazak == true ? "business_start-not" : "business_start")"></i></div>
+                        }
+                    }
+                    <div class="col-md-10">
+                        <h5>@item.IzlazNaziv</h5>
+                        @if (item.IzlazID == 1 || item.IzlazID == 2 || item.IzlazID == 3)
+                        {
+                            <p>Vrijeme @(item.Odlazak == true ? "odlaska:" : "dolaska:")<span class="bojaVremena">@item.Vrijeme.Value.ToString(@"hh\:mm")h</span></p>
+                        }
+                        else
+                        {
+                            <p>Vrijeme @(item.Odlazak == true ? "dolaska:" : "odlaska:") <span class="bojaVremena">@item.Vrijeme.Value.ToString(@"hh\:mm")h</span> </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="pt-4 col-md-12 reset">
+            <p class="aktivnosti-poruka">Nema aktivnosti za odabrani dan...</p>
+        </div>
+    }
+}
